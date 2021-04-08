@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahao.java.music.dao.AdminMapper">
+
+
+
+    <resultMap id="BaseResultMap" type="Admin">
+        <id column="admin_id" property="Admin_id"></id>
+        <result column="admin_name" property="Admin_name"></result>
+        <result column="admin_password" property="Admin_password"></result>
+    </resultMap>
+    <select id="verifyPassword" parameterType="Admin" resultType="int">
+        select admin_id from admin where admin_name=#{Admin_name} and admin_password =#{Admin_password} limit 1;
+    </select>
+</mapper>
