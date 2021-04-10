@@ -140,4 +140,10 @@
         on a.song_singerid=b.singer_id
         where a.song_singerid=#{singerId}
     </select>
+    <select id="selectSongNoInCurrentList"  parameterType="java.lang.Integer" resultMap="LeftJoinMap">
+        select a.song_id,a.song_name,a.song_introduction,b.singer_name
+        from song a left join singer b
+        on a.song_singerid=b.singer_id
+        where a.song_id not in(select song_id from listsong where songlist_id=#{songListId})
+    </select>
 </mapper>

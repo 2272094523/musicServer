@@ -50,5 +50,10 @@ public class SongServiceImpl implements ISongService {
         return songMapper.selectAllSongBySingerId(singerId);
     }
 
+    @Override
+    public List<Song> selectSongNoInCurrentList(Integer songListId) {
+        return songMapper.selectSongNoInCurrentList(songListId);
+    }
+
 
 }

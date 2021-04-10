@@ -9,4 +9,8 @@ import java.util.List;
  */
 public interface IListSongService {
     List<Song> selectSongOfListSong(Integer songListId);
+
+    Integer deleteSongFromListSong(Integer songId, Integer songListId);
+
+    boolean insertSongToListSong(Integer songId, Integer songListId);
 }

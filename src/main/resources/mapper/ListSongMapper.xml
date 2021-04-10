@@ -3,6 +3,12 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ahao.java.music.dao.ListSongMapper">
+    <insert id="insertSongToListSong">
+        insert into listsong(song_id,songlist_id) values(#{songId},#{songListId})
+    </insert>
+    <delete id="deleteSongFromListSong" parameterType="java.lang.Integer">
+        delete from listsong where song_id=#{songId} and songlist_id=#{songListId}
+    </delete>
 
     <select id="selectSongOfListSong" resultMap="com.ahao.java.music.dao.SongMapper.LeftJoinMap">
         select a.*,b.* from song a

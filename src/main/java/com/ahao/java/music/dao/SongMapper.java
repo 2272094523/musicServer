@@ -25,9 +25,5 @@ public interface SongMapper {
     public List<Song> selectAllSongBySingerId(Integer singerId);
 
 
-
-
-
-
-
+    List<Song> selectSongNoInCurrentList(Integer songListId);
 }

@@ -189,4 +189,13 @@ public class SongController {
         }
         return jsonObject;
     }
+    @RequestMapping(value = "/selectNoInList",method=RequestMethod.GET)
+    public Object selectSongNoInCurrentList(@RequestParam("songListId")Integer songListId){
+        JSONObject jsonObject = new JSONObject();
+        List<Song> list=iSongService.selectSongNoInCurrentList(songListId);
+        System.out.println("list = " + list);
+        jsonObject.put("data",new Status(200,"successful",list));
+        return jsonObject;
+    }
+
 }

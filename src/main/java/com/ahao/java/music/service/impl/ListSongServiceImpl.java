@@ -16,4 +16,14 @@ public class ListSongServiceImpl implements IListSongService {
     public List<Song> selectSongOfListSong(Integer songListId) {
         return listSongMapper.selectSongOfListSong(songListId);
     }
+
+    @Override
+    public Integer deleteSongFromListSong(Integer songId, Integer songListId) {
+        return listSongMapper.deleteSongFromListSong(songId,songListId);
+    }
+
+    @Override
+    public boolean insertSongToListSong(Integer songId, Integer songListId) {
+        return listSongMapper.insertSongToListSong(songId,songListId)>0?true:false;
+    }
 }
