@@ -8,18 +8,18 @@ public interface ISingerService {
 
 
 
-    public List<Singer> fuzzyQuerySingerByName(String Singer_name);
+    public List<Singer> fuzzyQuerySingerByName(String singerName);
 
     public List<Singer> selectAllSinger();
 
-    public List<Singer> selectAllSingerBySex(Byte Singer_sex);
+    public List<Singer> selectAllSingerBySex(Byte singerSex);
 
     public boolean insertSinger(Singer singer);
 
-    public boolean deleteSinger(Integer Singer_id);
+    public boolean deleteSinger(Integer singerId);
 
     public boolean updateSinger(Singer singer);
 
-    public Singer selectSingerById(Integer Singer_id);
+    public Singer selectSingerById(Integer singerId);
 
 }

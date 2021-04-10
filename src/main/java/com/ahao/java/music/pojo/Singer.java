@@ -12,12 +12,12 @@ import java.util.Date;
 @NoArgsConstructor
 public class Singer implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer Singer_id;
-    private String Singer_name;
-    private Byte Singer_sex;
-    private String Singer_img;
-    private Date Singer_birth;
-    private String Singer_location;
-    private String Singer_introduction;
+    private Integer singerId;
+    private String singerName;
+    private Byte singerSex;
+    private String singerImg;
+    private Date singerBirth;
+    private String singerLocation;
+    private String singerIntroduction;
 
 }

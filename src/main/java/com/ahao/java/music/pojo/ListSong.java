@@ -17,7 +17,7 @@ public class ListSong  implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
-    private Integer ListSong_id;
-    private Integer Song_id;
-    private Integer SongList_id;
+    private Integer listSongId;
+    private Integer songId;
+    private Integer songListId;
 }

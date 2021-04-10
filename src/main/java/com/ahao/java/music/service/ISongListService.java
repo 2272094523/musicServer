@@ -11,13 +11,13 @@ public interface ISongListService {
 
     public boolean updateSongList(SongList songList);
 
-    public boolean deleteSongList(Integer SongList_id);
+    public boolean deleteSongList(Integer songListId);
 
     public List<SongList> selectAllSongList();
 
-    public List<SongList> fuzzySelectSongListByTitle(String SongList_title);
+    public List<SongList> fuzzySelectSongListByTitle(String songListTitle);
 
-    public SongList selectSongListById(Integer SongList_id);
+    public SongList selectSongListById(Integer songListId);
 
-    public SongList selectSongListByStyle(String SongList_style);
+    public SongList selectSongListByStyle(String songListStyle);
 }

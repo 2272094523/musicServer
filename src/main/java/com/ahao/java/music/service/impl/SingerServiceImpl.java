@@ -24,8 +24,8 @@ public class SingerServiceImpl implements ISingerService {
     }
 
     @Override
-    public boolean deleteSinger(Integer Singer_id) {
-        return singerMapper.deleteSinger(Singer_id)>0?true:false;
+    public boolean deleteSinger(Integer singerId) {
+        return singerMapper.deleteSinger(singerId)>0?true:false;
     }
 
     @Override
@@ -34,13 +34,13 @@ public class SingerServiceImpl implements ISingerService {
     }
 
     @Override
-    public List<Singer> fuzzyQuerySingerByName(String Singer_name) {
-        return singerMapper.fuzzySelectSingerByName(Singer_name);
+    public List<Singer> fuzzyQuerySingerByName(String singerName) {
+        return singerMapper.fuzzySelectSingerByName(singerName);
     }
 
     @Override
-    public Singer selectSingerById(Integer Singer_id) {
-        return singerMapper.selectSingerById(Singer_id);
+    public Singer selectSingerById(Integer singerId) {
+        return singerMapper.selectSingerById(singerId);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class SingerServiceImpl implements ISingerService {
     }
 
     @Override
-    public List<Singer> selectAllSingerBySex(Byte Singer_sex) {
-        return singerMapper.selectAllSingerBySex(Singer_sex);
+    public List<Singer> selectAllSingerBySex(Byte singerSex) {
+        return singerMapper.selectAllSingerBySex(singerSex);
     }
 
 

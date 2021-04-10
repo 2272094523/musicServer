@@ -30,7 +30,7 @@ public class AdminController {
             jsonObject.put("data",new Status(200,"登录成功",id));
             return jsonObject;
         }
-        jsonObject.put("data",new Status(200,"登录失败",-1));
+        jsonObject.put("data",new Status(204,"登录失败",-1));
         return jsonObject;
     }
 }

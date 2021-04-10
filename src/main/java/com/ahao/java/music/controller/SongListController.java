@@ -49,9 +49,9 @@ public class SongListController {
         return jsonObject;
     }
     @RequestMapping(value = "delete",method = RequestMethod.POST)
-    public Object deleteSongList(Integer SongList_id){
+    public Object deleteSongList(Integer songListId){
         JSONObject jsonObject = new JSONObject();
-        boolean result=iSongListService.deleteSongList(SongList_id);
+        boolean result=iSongListService.deleteSongList(songListId);
         if (result){
             jsonObject.put("data",new Status(200,"删除歌单成功",null));
             return jsonObject;
@@ -66,7 +66,7 @@ public class SongListController {
         return jsonObject;
     }
     @RequestMapping(value = "/updateSongListImg",method = RequestMethod.POST)
-    public Object updateSongListImg(@RequestParam("file")MultipartFile multipartFile,@RequestParam("SongList_id") Integer SongList_id){
+    public Object updateSongListImg(@RequestParam("file")MultipartFile multipartFile,@RequestParam("SongList_id") Integer songListId){
         JSONObject jsonObject = new JSONObject();
         File path = new File(songListImgFolderPath);
         if (!path.exists()){
@@ -80,16 +80,16 @@ public class SongListController {
         String newSongListImgPath=songListImgFolderPath+"/"+songListImgName;
         System.out.println(newSongListImgPath);
         SongList songList = new SongList();
-        songList.setSongList_id(SongList_id);
-        songList.setSongList_img(newSongListImgPathToMysql);
+        songList.setSongListId(songListId);
+        songList.setSongListImg(newSongListImgPathToMysql);
         File newSongListImgFile = new File(newSongListImgPath);
         try {
             multipartFile.transferTo(newSongListImgFile);
             boolean result = iSongListService.updateSongList(songList);
             if (result){
                 jsonObject.put("data",new Status(200,"更新歌单图片成功",null));
-                songList = iSongListService.selectSongListById(SongList_id);
-                String path1=songListImgFolderPath+songList.getSongList_img().replaceAll("/songFile","");
+                songList = iSongListService.selectSongListById(songListId);
+                String path1=songListImgFolderPath+songList.getSongListImg().replaceAll("/songFile","");
                 System.out.println(path1);
                 File oldSongListImgFile=new File(path1);
                 oldSongListImgFile.delete();

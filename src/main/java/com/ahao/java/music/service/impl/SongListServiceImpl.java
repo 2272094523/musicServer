@@ -26,8 +26,8 @@ public class SongListServiceImpl implements ISongListService {
     }
 
     @Override
-    public boolean deleteSongList(Integer SongList_id) {
-        return songListMapper.deleteSongList(SongList_id)>0?true:false;
+    public boolean deleteSongList(Integer songListId) {
+        return songListMapper.deleteSongList(songListId)>0?true:false;
     }
 
     @Override
@@ -36,18 +36,18 @@ public class SongListServiceImpl implements ISongListService {
     }
 
     @Override
-    public List<SongList> fuzzySelectSongListByTitle(String SongList_title) {
-        return songListMapper.fuzzySelectSongListByTitle(SongList_title);
+    public List<SongList> fuzzySelectSongListByTitle(String songListTitle) {
+        return songListMapper.fuzzySelectSongListByTitle(songListTitle);
     }
 
     @Override
-    public SongList selectSongListById(Integer SongList_id) {
-        return songListMapper.selectSongListById(SongList_id);
+    public SongList selectSongListById(Integer songListId) {
+        return songListMapper.selectSongListById(songListId);
     }
 
     @Override
-    public SongList selectSongListByStyle(String SongList_style) {
-        return songListMapper.selectSongListByStyle(SongList_style);
+    public SongList selectSongListByStyle(String songListStyle) {
+        return songListMapper.selectSongListByStyle(songListStyle);
     }
 
 }

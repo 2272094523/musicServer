@@ -1,6 +1,5 @@
 package com.ahao.java.music.controller;
 
-import com.ahao.java.music.config.BaseControllerStringToDate;
 import com.ahao.java.music.pojo.Song;
 import com.ahao.java.music.pojo.Status;
 import com.ahao.java.music.service.ISongService;
@@ -14,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -46,32 +43,28 @@ public class SongController {
         }
         //存放歌曲的绝对路径
         File songFile=new File(songPath+"/"+songName);
+        song.setSongCreateTime(new Date());
+        String songRelativePath=songPathToMysql+"/"+songName;
+        song.setSongUrl(songRelativePath);
+        song.setSongImg(songImgPathToMysql+"/"+"init.jpg");
         try {
             //复制文件
             multipartFile.transferTo(songFile);
-            song.setSong_createTime(new Date());
-            String songRelativePath=songPathToMysql+"/"+songName;
-            song.setSong_url(songRelativePath);
-            song.setSong_img(songImgPathToMysql+"/"+"init.jpg");
-            System.out.println(song);
             boolean result=iSongService.insertSong(song);
-            System.out.println("result = " + result);
             if (result){
                 jsonObject.put("data",new Status(200,"添加歌曲成功",songRelativePath));
             }
         } catch (Exception e) {
             jsonObject.put("data",new Status(204,"添加歌曲失败",null));
             e.printStackTrace();
-        }finally {
-            return jsonObject;
         }
-
+        return jsonObject;
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Object updateSong(Song song){
         JSONObject jsonObject = new JSONObject();
-        song.setSong_updateTime(new Date());
+        song.setSongUpdateTime(new Date());
         boolean result=iSongService.updateSong(song);
         if (result){
             jsonObject.put("data",new Status(200,"修改歌曲信息成功",null));
@@ -82,20 +75,19 @@ public class SongController {
     }
 
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public Object deleteSong(Integer Song_id){
+    public Object deleteSong(Integer songId){
         JSONObject jsonObject = new JSONObject();
-        Song delSong = iSongService.selectSongById(Song_id);
-        System.out.println(delSong);
-        String delSongFile=songPath+delSong.getSong_url().replaceAll("/songFile","");
+        Song delSong = iSongService.selectSongById(songId);
+        String delSongFile=songPath+delSong.getSongUrl().replaceAll("/songFile","");
         File delFile = new File(delSongFile);
-        boolean result=iSongService.deleteSong(Song_id);
+        boolean result=iSongService.deleteSong(songId);
         if (result){
+            jsonObject.put("data",new Status(200,"删除歌曲成功",null));
             delFile.delete();
-            if (!delSong.getSong_img().equals("/songImg/init.jpg")){
-                File delImg = new File(songImgPath + delSong.getSong_img().replaceAll("/songImg", ""));
+            if (!delSong.getSongImg().equals("/songImg/init.jpg")){
+                File delImg = new File(songImgPath + delSong.getSongImg().replaceAll("/songImg", ""));
                 delImg.delete();
             }
-            jsonObject.put("data",new Status(200,"删除歌曲成功",null));
             return jsonObject;
         }
         jsonObject.put("data",new Status(204,"删除歌曲失败",null));
@@ -105,35 +97,30 @@ public class SongController {
     @RequestMapping(value = "/selectAll",method = RequestMethod.GET)
     public Object selectAllSong(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(200,"查询成功",iSongService.selectAllSong()));
+        List<Song> list = iSongService.selectAllSong();
+        jsonObject.put("data",new Status(200,"查询成功",list));
         return jsonObject;
 
     }
 
     @RequestMapping(value = "/fuzzySelect",method = RequestMethod.GET)
-    public Object fuzzySelectSongByName(String Song_name){
+    public Object fuzzySelectSongByName(String songName){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(200,"查询成功",iSongService.fuzzySelectSongByName(Song_name)));
+        List<Song> list = iSongService.fuzzySelectSongByName(songName);
+        jsonObject.put("data",new Status(200,"查询成功",list));
         return jsonObject;
     }
 
-    @RequestMapping(value = "/selectById",method = RequestMethod.GET)
-    public Object selectSongById(Integer Song_id){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(200,"查询成功",iSongService.selectSongById(Song_id)));
-        return jsonObject;
-    }
 
     @RequestMapping(value="/selectAllBySingerId",method = RequestMethod.GET)
-    public Object selectAllBySingerId(Integer Song_singerId){
-        System.out.println(Song_singerId);
+    public Object selectAllBySingerId(Integer singerId){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(200,"查询成功",iSongService.selectAllBySingerId(Song_singerId)));
+        List<Song> list = iSongService.selectAllBySingerId(singerId);
+        jsonObject.put("data",new Status(200,"查询成功",list));
         return jsonObject;
     }
-
     @RequestMapping(value="/updateSongImg",method = RequestMethod.POST)
-    public Object updateSongImg(@RequestParam("file")MultipartFile multipartFile,@RequestParam("Song_id") Integer Song_id){
+    public Object updateSongImg(@RequestParam("file")MultipartFile multipartFile,@RequestParam("songId") Integer songId){
         JSONObject jsonObject = new JSONObject();
         File folder = new File(songImgPath);
         if (folder.exists()){
@@ -147,12 +134,12 @@ public class SongController {
         File newSongFile = new File(newSongImgPath);
         try {
             Song song = new Song();
-            song.setSong_img(newSongImgPathToMysql);
-            song.setSong_id(Song_id);
+            song.setSongImg(newSongImgPathToMysql);
+            song.setSongId(songId);
             //在服务器生产新文件
             multipartFile.transferTo(newSongFile);
             //获取旧文件
-            String oldSongImgPath=songImgPath+iSongService.selectSongById(Song_id).getSong_img().replaceAll("/songImg","");
+            String oldSongImgPath=songImgPath+iSongService.selectSongById(songId).getSongImg().replaceAll("/songImg","");
             boolean result = iSongService.updateSong(song);
             if (result) {
                 jsonObject.put("data", new Status(200, "更新歌曲图片成功", null));
@@ -165,13 +152,12 @@ public class SongController {
         } catch (IOException e) {
             jsonObject.put("data",new Status(204,"更新歌曲图片失败", null));
             e.printStackTrace();
-        }finally {
-            return jsonObject;
         }
+        return jsonObject;
     }
 
     @RequestMapping(value="/updateSongFile",method = RequestMethod.POST)
-    public Object updateSongFile(@RequestParam("file")MultipartFile multipartFile,@RequestParam("Song_id") Integer Song_id){
+    public Object updateSongFile(@RequestParam("file")MultipartFile multipartFile,@RequestParam("songId") Integer songId){
         JSONObject jsonObject = new JSONObject();
         File folder = new File(songPath);
         if (folder.exists()){
@@ -183,28 +169,24 @@ public class SongController {
         //获取文件的相对地址存到数据库
         String newSongImgPathToMysql=songPathToMysql+"/"+songPathName;
         File newSongFile = new File(newSongFilePath);
+        Song song = new Song();
+        song.setSongUrl(newSongImgPathToMysql);
+        song.setSongId(songId);
         try {
-            Song song = new Song();
-            song.setSong_url(newSongImgPathToMysql);
-            song.setSong_id(Song_id);
             //在服务器生产新文件
             multipartFile.transferTo(newSongFile);
             //获取旧文件
-            String oldSongFilePath=songPath+iSongService.selectSongById(Song_id).getSong_url().replaceAll("/songFile","");
-            System.out.println(oldSongFilePath);
+            String oldSongFilePath=songPath+iSongService.selectSongById(songId).getSongUrl().replaceAll("/songFile","");
             boolean result = iSongService.updateSong(song);
             if (result) {
                 jsonObject.put("data", new Status(200, "更新歌曲文件成功", null));
             }
             File oldSongFile = new File(oldSongFilePath);
             oldSongFile.delete();
-        } catch (IOException e) {
+        } catch (Exception e) {
             jsonObject.put("data",new Status(204,"更新歌曲文件失败", null));
             e.printStackTrace();
-        }finally {
-            return jsonObject;
         }
+        return jsonObject;
     }
-
-
 }

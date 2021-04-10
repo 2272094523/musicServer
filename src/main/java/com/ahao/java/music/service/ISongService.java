@@ -10,13 +10,14 @@ public interface ISongService {
 
     public boolean updateSong(Song song);
 
-    public boolean deleteSong(Integer Song_id);
+    public boolean deleteSong(Integer songId);
 
     public List<Song> selectAllSong();
 
-    public List<Song> fuzzySelectSongByName(String Song_name);
+    public List<Song> fuzzySelectSongByName(String songName);
 
     public Song selectSongById(Integer Song_id);
 
-    public List<Song> selectAllBySingerId(Integer Song_singerId);
+    public List<Song> selectAllBySingerId(Integer singerId);
+
 }

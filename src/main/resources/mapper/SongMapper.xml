@@ -3,132 +3,141 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ahao.java.music.dao.SongMapper">
-    <resultMap id="LeftJoinMap" type="song">
-        <id column="song_id" property="Song_id"></id>
-        <result column="song_name" property="Song_name"></result>
-        <result column="song_singerid" property="Song_singerId"></result>
-        <result column="song_introduction" property="Song_introduction"></result>
-        <result column="song_createtime" property="Song_createTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
-        <result column="song_updatetime" property="Song_updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
-        <result column="song_img" property="Song_img"></result>
-        <result column="song_lyric" property="Song_lyric"></result>
-        <result column="song_url" property="Song_url"></result>
+    <resultMap id="LeftJoinMap" type="com.ahao.java.music.pojo.Song">
+        <id column="song_id" property="songId"></id>
+        <result column="song_name" property="songName"></result>
+        <result column="song_introduction" property="songIntroduction"></result>
+        <result column="song_createtime" property="songCreateTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="song_updatetime" property="songUpdateTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="song_img" property="songImg"></result>
+        <result column="song_lyric" property="songLyric"></result>
+        <result column="song_url" property="songUrl"></result>
+        <association property="singer" javaType="com.ahao.java.music.pojo.Singer">
+            <id column="singer_id" property="singerId"></id>
+            <result column="singer_name"  property="singerName"></result>
+            <result column="singer_sex" property="singerSex"></result>
+            <result column="singer_img" property="singerImg"></result>
+            <result column="singer_introduction" property="singerIntroduction"></result>
+            <result column="singer_birth" property="singerBirth"></result>
+            <result column="singer_location" property="singerLocation"></result>
+        </association>
+    </resultMap>
+    <resultMap id="BaseResultMap" type="com.ahao.java.music.pojo.Song">
+        <result column="song_img" property="songImg"></result>
+        <result column="song_url" property="songUrl"></result>
     </resultMap>
     <insert id="insertSong" parameterType="com.ahao.java.music.pojo.Song">
+        insert into song
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="Song_name!=null">
+            <if test="songName!=null">
                 song_name,
             </if>
-            <if test="Song_singerId!=null">
+            <if test="singer.singerId!=null">
                 song_singerid,
             </if>
-            <if test="Song_introduction!=null">
+            <if test="songIntroduction!=null">
                 song_introduction,
             </if>
-            <if test="Song_createTime!=null">
+            <if test="songCreateTime!=null">
                 song_createtime,
             </if>
-            <if test="Song_updateTime!=null">
+            <if test="songUpdateTime!=null">
                 song_updatetime,
             </if>
-            <if test="Song_img!=null">
+            <if test="songImg!=null">
                 song_img,
             </if>
-            <if test="Song_lyric!=null">
+            <if test="songLyric!=null">
                 song_lyric,
             </if>
-            <if test="Song_url!=null">
+            <if test="songUrl!=null">
                 song_url,
             </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="Song_name!=null">
-                #{Song_name},
+            <if test="songName!=null">
+                #{songName},
             </if>
-            <if test="Song_singerId!=null">
-                #{Song_singerid},
+            <if test="singer.singerId!=null">
+                #{singer.singerId},
             </if>
-            <if test="Song_introduction!=null">
-                #{Song_introduction},
+            <if test="songIntroduction!=null">
+                #{songIntroduction},
             </if>
-            <if test="Song_createTime!=null">
-                #{Song_createTime},
+            <if test="songCreateTime!=null">
+                #{songCreateTime},
             </if>
-            <if test="Song_updateTime!=null">
-                #{Song_updateTime},
+            <if test="songUpdateTime!=null">
+                #{songUpdateTime},
             </if>
-            <if test="Song_img!=null">
-                #{Song_img},
+            <if test="songImg!=null">
+                #{songImg},
             </if>
-            <if test="Song_lyric!=null">
-                #{Song_lyric},
+            <if test="songLyric!=null">
+                #{songLyric},
             </if>
-            <if test="Song_url!=null">
-                #{Song_url},
+            <if test="songUrl!=null">
+                #{songUrl},
             </if>
         </trim>
     </insert>
 
-    <update id="updateSong" parameterType="song">
+    <update id="updateSong" parameterType="com.ahao.java.music.pojo.Song">
         update song
         <set >
-            <if test="Song_name!=null">
-                song_name=#{Song_name},
+            <if test="songName!=null">
+                song_name=#{songName},
             </if>
-            <if test="Song_introduction!=null">
-                song_introduction=#{Song_introduction},
+            <if test="songIntroduction!=null">
+                song_introduction=#{songIntroduction},
             </if>
-            <if test="Song_createTime!=null">
-                song_createtime=#{Song_createTime},
+            <if test="songCreateTime!=null">
+                song_createtime=#{songCreateTime},
             </if>
-            <if test="Song_updateTime!=null">
-                song_updatetime=#{Song_updateTime},
+            <if test="songUpdateTime!=null">
+                song_updatetime=#{songUpdateTime},
             </if>
-            <if test="Song_img!=null">
-                song_img=#{Song_img},
+            <if test="songImg!=null">
+                song_img=#{songImg},
             </if>
-            <if test="Song_lyric!=null">
-                song_lyric=#{Song_lyric},
+            <if test="songLyric!=null">
+                song_lyric=#{songLyric},
             </if>
-            <if test="Song_url!=null">
-                song_url=#{Song_url},
+            <if test="songUrl!=null">
+                song_url=#{songUrl},
             </if>
         </set>
-        where song_id=#{Song_id}
+        where song_id=#{songId}
     </update>
 
 
     <delete id="deleteSong" parameterType="java.lang.Integer">
-       delete from song where song_id=#{Song_id}
+       delete from song where song_id=#{songId}
     </delete>
 
 
     <select id="selectAllSong" resultMap="LeftJoinMap">
-        select a.song_id,a.song_name,a.song_introduction,a.song_createtime,a.song_updatetime,a.song_img,a.song_lyric,a.song_url,b.singer_name
+        select a.song_id,a.song_name,a.song_introduction,a.song_img,a.song_url,a.song_lyric,b.singer_name as singer_name,b.singer_id as singer_id
         from song a left join singer b
         on a.song_singerid=b.singer_id
     </select>
 
     <select id="fuzzySelectSongByName" parameterType="string" resultMap="LeftJoinMap">
-        select a.song_id,a.song_name,a.song_introduction,a.song_createtime,a.song_updatetime,a.song_img,a.song_lyric,a.song_url,b.singer_name
+        select a.song_id,a.song_name,a.song_introduction,a.song_img,a.song_url,a.song_lyric,b.singer_name as singer_name,b.singer_id as singer_id
         from song a left join singer b
         on a.song_singerid=b.singer_id
-        where song_name like contact('%',#{Song_name},'%')
+        where song_name like contact('%',#{songName},'%')
     </select>
 
-    <select id="selectSongById" parameterType="java.lang.Integer" resultMap="LeftJoinMap">
-        select a.song_id,a.song_name,a.song_introduction,a.song_createtime,a.song_updatetime,a.song_img,a.song_lyric,a.song_url,b.singer_name
-        from song a left join singer b
-        on a.song_singerid=b.singer_id
-        where a.song_id=#{Song_id} limit 1
-        select
+    <select id="selectSongById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select song_url,song_img from song where song_id=#{songId}
     </select>
 
     <select id="selectAllSongBySingerId" parameterType="java.lang.Integer" resultMap="LeftJoinMap">
-        select a.song_id,a.song_name,a.song_introduction,a.song_createtime,a.song_updatetime,a.song_img,a.song_lyric,a.song_url,b.singer_name
+        select a.song_id,a.song_name,a.song_introduction,a.song_img,a.song_url,a.song_lyric,a.song_createtime,a.song_updatetime,b.singer_name as singer_name,b.singer_id as singer_id
         from song a left join singer b
         on a.song_singerid=b.singer_id
-        where a.song_singerid=#{Song_singerId}
+        where a.song_singerid=#{singerId}
     </select>
 </mapper>

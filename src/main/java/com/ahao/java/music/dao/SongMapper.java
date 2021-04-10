@@ -14,15 +14,16 @@ public interface SongMapper {
 
     public int updateSong(Song song);
 
-    public int deleteSong(Integer Song_id);
+    public int deleteSong(Integer songId);
 
     public List<Song> selectAllSong();
 
-    public List<Song> fuzzySelectSongByName(String Song_name);
+    public List<Song> fuzzySelectSongByName(String songName);
 
-    public Song selectSongById(Integer Song_id);
+    public Song selectSongById(Integer songId);
 
-    public List<Song> selectAllSongBySingerId(Integer Song_singerId);
+    public List<Song> selectAllSongBySingerId(Integer singerId);
+
 
 
 

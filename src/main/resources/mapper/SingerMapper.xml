@@ -6,62 +6,62 @@
 
 
 
-    <resultMap id="BaseResultMap" type="Singer">
-        <id column="singer_id" property="Singer_id"></id>
-        <result column="singer_name" property="Singer_name"></result>
-        <result column="singer_sex" property="Singer_sex" javaType="java.lang.Byte" jdbcType="TINYINT" ></result>
-        <result column="singer_img" property="Singer_img"></result>
-        <result column="singer_birth" property="Singer_birth" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
-        <result column="singer_location" property="Singer_location"></result>
-        <result column="singer_introduction" property="Singer_introduction"></result>
+    <resultMap id="BaseResultMap" type="singer">
+        <id column="singer_id" property="singerId"></id>
+        <result column="singer_name" property="singerName"></result>
+        <result column="singer_sex" property="singerSex" javaType="java.lang.Byte" jdbcType="TINYINT" ></result>
+        <result column="singer_img" property="singerImg"></result>
+        <result column="singer_birth" property="singerBirth" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="singer_location" property="singerLocation"></result>
+        <result column="singer_introduction" property="singerIntroduction"></result>
     </resultMap>
     <insert id="insertSinger" parameterType="singer" >
         insert into singer
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="Singer_id!=null">
+            <if test="singerId!=null">
                 singer_id,
             </if>
-            <if test="Singer_name!=null">
+            <if test="singerName!=null">
                 singer_name,
             </if>
-            <if test="Singer_sex!=null">
+            <if test="singerSex!=null">
                 singer_sex,
             </if>
-            <if test="Singer_img!=null">
+            <if test="singerImg!=null">
                 singer_img,
             </if>
-            <if test="Singer_birth!=null">
+            <if test="singerBirth!=null">
                 singer_birth,
             </if>
-            <if test="Singer_location!=null">
+            <if test="singerLocation!=null">
                 singer_location,
             </if>
-            <if test="Singer_introduction!=null">
+            <if test="singerIntroduction!=null">
                 singer_introduction,
             </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="Singer_id!=null">
-                #{Singer_id},
+            <if test="singerId!=null">
+                #{singerId},
             </if>
-            <if test="Singer_name!=null">
-                #{Singer_name},
+            <if test="singerName!=null">
+                #{singerName},
             </if>
-            <if test="Singer_sex!=null">
-                #{Singer_sex},
+            <if test="singerSex!=null">
+                #{singerSex},
             </if>
-            <if test="Singer_img!=null">
-                #{Singer_img},
+            <if test="singerImg!=null">
+                #{singerImg},
             </if>
-            <if test="Singer_birth!=null">
-                #{Singer_birth},
+            <if test="singerBirth!=null">
+                #{singerBirth},
             </if>
-            <if test="Singer_location!=null">
-                #{Singer_location},
+            <if test="singerLocation!=null">
+                #{singerLocation},
             </if>
-            <if test="Singer_introduction!=null">
-                #{Singer_introduction},
+            <if test="singerIntroduction!=null">
+                #{singerIntroduction},
             </if>
         </trim>
     </insert>
@@ -69,34 +69,34 @@
     <update id="updateSinger" parameterType="singer">
         update singer
         <set >
-            <if test="Singer_name!=null">
-                singer_name=#{Singer_name},
+            <if test="singerName!=null">
+                singer_name=#{singerName},
             </if>
-            <if test="Singer_sex!=null">
-                singer_sex=#{Singer_sex},
+            <if test="singerSex!=null">
+                singer_sex=#{singerSex},
             </if>
-            <if test="Singer_img!=null">
-                singer_img=#{Singer_img},
+            <if test="singerImg!=null">
+                singer_img=#{singerImg},
             </if>
-            <if test="Singer_birth!=null">
-                singer_birth=#{Singer_birth},
+            <if test="singerBirth!=null">
+                singer_birth=#{singerBirth},
             </if>
-            <if test="Singer_location!=null">
-                singer_location=#{Singer_location},
+            <if test="singerLocation!=null">
+                singer_location=#{singerLocation},
             </if>
-            <if test="Singer_introduction!=null">
-                singer_introduction=#{Singer_introduction},
+            <if test="singerIntroduction!=null">
+                singer_introduction=#{singerIntroduction},
             </if>
         </set>
-        where singer_id=#{Singer_id}
+        where singer_id=#{singerId}
     </update>
 
     <delete id="deleteSinger" parameterType="java.lang.Integer">
-       delete from singer where singer_id=#{Singer_id}
+       delete from singer where singer_id=#{singerId}
     </delete>
 
     <select id="selectSingerByName" parameterType="string" resultMap="BaseResultMap">
-        select * from singer where singer_name=#{Singer_name}
+        select * from singer where singer_name=#{singerName}
     </select>
 
     <select id="selectAllSinger" resultMap="BaseResultMap">
@@ -104,18 +104,15 @@
     </select>
 
     <select id="fuzzySelectSingerByName" parameterType="string" resultMap="BaseResultMap">
-        select * from singer where singer_name like concat('%',#{Singer_name},'%')
+        select * from singer where singer_name like concat('%',#{singerName},'%')
     </select>
 
     <select id="selectAllSingerBySex" parameterType="java.lang.Byte" resultMap="BaseResultMap" >
-        select * from singer where singer_sex=#{Singer_sex,jdbcType=TINYINT}
+        select * from singer where singer_sex=#{singerSex,jdbcType=TINYINT}
     </select>
 
     <select id="selectSingerById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select * from singer where singer_id=#{Singer_id} limit 1
+        select * from singer where singer_id=#{singerId} limit 1
     </select>
-
-
-
 
 </mapper>

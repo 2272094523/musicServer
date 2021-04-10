@@ -15,17 +15,17 @@ public interface SingerMapper {
 
     public int updateSinger(Singer singer);
 
-    public int deleteSinger(Integer Singer_id);
+    public int deleteSinger(Integer singerId);
 
-    public Singer selectSingerByName(String Singer_name);
+    public Singer selectSingerByName(String singerName);
 
     public List<Singer> selectAllSinger();
 
-    public List<Singer> fuzzySelectSingerByName(String Singer_name);
+    public List<Singer> fuzzySelectSingerByName(String singerName);
 
-    public List<Singer> selectAllSingerBySex(Byte Singer_sex);
+    public List<Singer> selectAllSingerBySex(Byte singerSex);
 
-    public Singer selectSingerById(Integer Singer_id);
+    public Singer selectSingerById(Integer singerId);
 
 
 

@@ -11,11 +11,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SongList implements Serializable {
 
-    private Integer SongList_id;
-    private String SongList_title;
-    private String SongList_img;
-    private String SongList_introduction;
-    private String SongList_style;
+    private Integer songListId;
+    private String songListTitle;
+    private String songListImg;
+    private String songListIntroduction;
+    private String songListStyle;
 
 
 }

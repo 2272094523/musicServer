@@ -6,42 +6,42 @@
 
 
 
-    <resultMap id="BaseResultMap" type="SongList">
-        <id column="songlist_id" property="SongList_id"></id>
-        <result column="songlist_title" property="SongList_title"></result>
-        <result column="songlist_img" property="SongList_img"></result>
-        <result column="songlist_introduction" property="SongList_introduction"></result>
-        <result column="songlist_style" property="SongList_style"></result>
+    <resultMap id="BaseResultMap" type="com.ahao.java.music.pojo.SongList">
+        <id column="songlist_id" property="songListId"></id>
+        <result column="songlist_title" property="songListTitle"></result>
+        <result column="songlist_img" property="songListImg"></result>
+        <result column="songlist_introduction" property="songListIntroduction"></result>
+        <result column="songlist_style" property="songListStyle"></result>
     </resultMap>
-    <insert id="insertSongList" parameterType="SongList" >
+    <insert id="insertSongList" parameterType="com.ahao.java.music.pojo.SongList" >
         insert into songlist
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="SongList_title!=null">
+            <if test="songListTitle!=null">
                 songlist_title,
             </if>
-            <if test="SongList_introduction!=null">
+            <if test="songListIntroduction!=null">
                 songlist_introduction,
             </if>
-            <if test="SongList_style!=null">
+            <if test="songListStyle!=null">
                 songlist_style,
             </if>
-            <if test="SongList_img!=null">
+            <if test="songListImg!=null">
                 songlist_img
             </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="SongList_title!=null">
-                #{SongList_title},
+            <if test="songListTitle!=null">
+                #{songListTitle},
             </if>
-            <if test="SongList_introduction!=null">
-                #{SongList_introduction},
+            <if test="songListIntroduction!=null">
+                #{songListIntroduction},
             </if>
-            <if test="SongList_style!=null">
-                #{SongList_style},
+            <if test="songListStyle!=null">
+                #{songListStyle},
             </if>
-            <if test="SongList_img!=null">
-                #{SongList_img},
+            <if test="songListImg!=null">
+                #{songListImg},
             </if>
         </trim>
     </insert>
@@ -49,24 +49,24 @@
     <update id="updateSongList" parameterType="SongList">
         update songlist
         <set >
-            <if test="SongList_title!=null">
-                songlist_title=#{SongList_title},
+            <if test="songListTitle!=null">
+                songlist_title=#{songListTitle},
             </if>
-            <if test="SongList_img!=null">
-                songlist_img=#{SongList_img},
+            <if test="songListImg!=null">
+                songlist_img=#{songListImg},
             </if>
-            <if test="SongList_introduction!=null">
-                songlist_introduction=#{SongList_introduction},
+            <if test="songListIntroduction!=null">
+                songlist_introduction=#{songListIntroduction},
             </if>
-            <if test="SongList_style!=null">
-                songlist_style=#{SongList_style},
+            <if test="songListStyle!=null">
+                songlist_style=#{songListStyle},
             </if>
         </set>
-        where songlist_id=#{SongList_id}
+        where songlist_id=#{songListId}
     </update>
 
     <delete id="deleteSongList" parameterType="java.lang.Integer">
-        delete from songlist where songlist_id=#{SongList_id}
+        delete from songlist where songlist_id=#{songListId}
     </delete>
 
     <select id="selectAllSongList" resultMap="BaseResultMap">
@@ -74,15 +74,15 @@
     </select>
 
     <select id="fuzzySelectSongListByTitle" resultMap="BaseResultMap" parameterType="string">
-        select * from songlist where songlist_title like concat('$',#{SongList_title},'$')
+        select * from songlist where songlist_title like concat('$',#{songListTitle},'$')
     </select>
 
     <select id="selectSongListById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select * from songlist where songlist_id=#{SongList_id} limit 1
+        select * from songlist where songlist_id=#{songListId} limit 1
     </select>
 
     <select id="selectSongListByStyle" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select * from songlist where songlist_style =#{SongList_style}
+        select * from songlist where songlist_style =#{songListStyle}
     </select>
 
 

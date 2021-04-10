@@ -37,9 +37,9 @@ public class SingerController extends BaseControllerStringToDate {
     }
 
     @RequestMapping(value = "/selectAllBySex",method = RequestMethod.GET)
-    public Object selectAllSingerBySex(Byte Singer_sex){
+    public Object selectAllSingerBySex(Byte singerSex){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(200,"查询成功",iSingerService.selectAllSingerBySex(Singer_sex)));
+        jsonObject.put("data",new Status(200,"查询成功",iSingerService.selectAllSingerBySex(singerSex)));
         return jsonObject;
     }
 
@@ -56,10 +56,10 @@ public class SingerController extends BaseControllerStringToDate {
     }
 
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public Object deleteSinger(@RequestParam("Singer_id") Integer Singer_id){
+    public Object deleteSinger(@RequestParam("Singer_id") Integer singerId){
         JSONObject jsonObject=new JSONObject();
-        String temp=iSingerService.selectSingerById(Singer_id).getSinger_img().replaceAll("/singerImg", "");
-        boolean result=iSingerService.deleteSinger(Singer_id);
+        String temp=iSingerService.selectSingerById(singerId).getSingerImg().replaceAll("/singerImg", "");
+        boolean result=iSingerService.deleteSinger(singerId);
         if (result){
             if (!temp.equals("/init.png")){
                 File delFile = new File(imgPath + temp);
@@ -68,7 +68,7 @@ public class SingerController extends BaseControllerStringToDate {
             jsonObject.put("data",new Status(200,"删除成功",null));
             return jsonObject;
         }
-        jsonObject.put("data",new Status(200,"删除失败",null));
+        jsonObject.put("data",new Status(204,"删除失败",null));
         return jsonObject;
     }
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
@@ -85,7 +85,7 @@ public class SingerController extends BaseControllerStringToDate {
 
 
     @RequestMapping(value = "/updateSingerImg",method = RequestMethod.POST)
-    public Object updateSingerImg(@RequestParam("file")MultipartFile multipartFile, @RequestParam("Singer_id")Integer Singer_id){
+    public Object updateSingerImg(@RequestParam("file")MultipartFile multipartFile, @RequestParam("Singer_id")Integer singerId){
         JSONObject jsonObject=new JSONObject();
         if (multipartFile.isEmpty()){
             jsonObject.put("data",new Status(204,"上传失败",null));
@@ -104,10 +104,10 @@ public class SingerController extends BaseControllerStringToDate {
         String newSingerImgPathToMysql=imgPathToMysql+"/"+singerImgName;
         try {
             Singer singer = new Singer();
-            singer.setSinger_id(Singer_id);
-            singer.setSinger_img(newSingerImgPathToMysql);
+            singer.setSingerId(singerId);
+            singer.setSingerImg(newSingerImgPathToMysql);
             multipartFile.transferTo(newSingerImgPath);
-            String oldSingerImgToMysql=iSingerService.selectSingerById(Singer_id).getSinger_img();
+            String oldSingerImgToMysql=iSingerService.selectSingerById(singerId).getSingerImg();
             oldSingerImgToMysql=oldSingerImgToMysql.replaceAll("/singerImg", "");
             boolean updateResult = iSingerService.updateSinger(singer);
             if (updateResult){
