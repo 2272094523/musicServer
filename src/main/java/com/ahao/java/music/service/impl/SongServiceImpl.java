@@ -46,6 +46,11 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
+    public Integer selectTotals() {
+        return songMapper.selectTotals();
+    }
+
+    @Override
     public List<Song> selectAllBySingerId(Integer singerId) {
         return songMapper.selectAllSongBySingerId(singerId);
     }

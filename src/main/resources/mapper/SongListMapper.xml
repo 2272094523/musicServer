@@ -84,6 +84,9 @@
     <select id="selectSongListByStyle" resultMap="BaseResultMap" parameterType="java.lang.String">
         select * from songlist where songlist_style =#{songListStyle}
     </select>
+    <select id="selectTotals" resultType="java.lang.Integer">
+        select count(songlist_id) from songlist
+    </select>
 
 
 </mapper>

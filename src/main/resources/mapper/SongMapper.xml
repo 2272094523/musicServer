@@ -127,7 +127,7 @@
         select a.song_id,a.song_name,a.song_introduction,a.song_img,a.song_url,a.song_lyric,b.singer_name as singer_name,b.singer_id as singer_id
         from song a left join singer b
         on a.song_singerid=b.singer_id
-        where song_name like contact('%',#{songName},'%')
+        where song_name like concat('%',#{songName},'%')
     </select>
 
     <select id="selectSongById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -145,5 +145,8 @@
         from song a left join singer b
         on a.song_singerid=b.singer_id
         where a.song_id not in(select song_id from listsong where songlist_id=#{songListId})
+    </select>
+    <select id="selectTotals" resultType="java.lang.Integer">
+        select count(song_id) from song
     </select>
 </mapper>

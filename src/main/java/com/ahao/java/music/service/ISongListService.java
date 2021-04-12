@@ -20,4 +20,6 @@ public interface ISongListService {
     public SongList selectSongListById(Integer songListId);
 
     public SongList selectSongListByStyle(String songListStyle);
+
+    Integer selectTotals();
 }

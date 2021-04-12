@@ -21,4 +21,6 @@ public interface ISongService {
     public List<Song> selectAllBySingerId(Integer singerId);
 
     List<Song> selectSongNoInCurrentList(Integer songListId);
+
+    Integer selectTotals();
 }

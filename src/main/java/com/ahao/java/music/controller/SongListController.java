@@ -62,11 +62,11 @@ public class SongListController {
     @RequestMapping(value = "/selectAll",method = RequestMethod.GET)
     public Object selectAllSongList(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(204,"查询成功",iSongListService.selectAllSongList()));
+        jsonObject.put("data",new Status(200,"查询成功",iSongListService.selectAllSongList()));
         return jsonObject;
     }
     @RequestMapping(value = "/updateSongListImg",method = RequestMethod.POST)
-    public Object updateSongListImg(@RequestParam("file")MultipartFile multipartFile,@RequestParam("SongList_id") Integer songListId){
+    public Object updateSongListImg(@RequestParam("file")MultipartFile multipartFile,@RequestParam("songListId") Integer songListId){
         JSONObject jsonObject = new JSONObject();
         File path = new File(songListImgFolderPath);
         if (!path.exists()){

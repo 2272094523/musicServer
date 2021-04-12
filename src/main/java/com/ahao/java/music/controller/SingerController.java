@@ -23,13 +23,13 @@ public class SingerController extends BaseControllerStringToDate {
     public final static String imgPathToMysql="/singerImg";
 
     @RequestMapping(value = "/fuzzyQuery",method = RequestMethod.GET)
-    public Object fuzzyQuerySingerByName(@RequestParam("Singer_name") String Singer_name){
+    public Object fuzzyQuerySingerByName(@RequestParam("singerName") String singerName){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data",new Status(200,"查询成功",iSingerService.fuzzyQuerySingerByName(Singer_name)));
+        jsonObject.put("data",new Status(200,"查询成功",iSingerService.fuzzyQuerySingerByName(singerName)));
         return jsonObject;
     }
 
-    @RequestMapping(value = "/selectAll",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectAll",method = RequestMethod.GET)
     public Object selectAllSinger(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("data",new Status(200,"查询成功",iSingerService.selectAllSinger()));
@@ -56,7 +56,7 @@ public class SingerController extends BaseControllerStringToDate {
     }
 
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public Object deleteSinger(@RequestParam("Singer_id") Integer singerId){
+    public Object deleteSinger(@RequestParam("singerId") Integer singerId){
         JSONObject jsonObject=new JSONObject();
         String temp=iSingerService.selectSingerById(singerId).getSingerImg().replaceAll("/singerImg", "");
         boolean result=iSingerService.deleteSinger(singerId);
@@ -85,7 +85,7 @@ public class SingerController extends BaseControllerStringToDate {
 
 
     @RequestMapping(value = "/updateSingerImg",method = RequestMethod.POST)
-    public Object updateSingerImg(@RequestParam("file")MultipartFile multipartFile, @RequestParam("Singer_id")Integer singerId){
+    public Object updateSingerImg(@RequestParam("file")MultipartFile multipartFile, @RequestParam("singerId")Integer singerId){
         JSONObject jsonObject=new JSONObject();
         if (multipartFile.isEmpty()){
             jsonObject.put("data",new Status(204,"上传失败",null));

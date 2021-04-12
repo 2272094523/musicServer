@@ -46,7 +46,7 @@ public class SongController {
         song.setSongCreateTime(new Date());
         String songRelativePath=songPathToMysql+"/"+songName;
         song.setSongUrl(songRelativePath);
-        song.setSongImg(songImgPathToMysql+"/"+"init.jpg");
+        song.setSongImg(songImgPathToMysql+"/"+"init.JPG");
         try {
             //复制文件
             multipartFile.transferTo(songFile);
@@ -84,7 +84,7 @@ public class SongController {
         if (result){
             jsonObject.put("data",new Status(200,"删除歌曲成功",null));
             delFile.delete();
-            if (!delSong.getSongImg().equals("/songImg/init.jpg")){
+            if (!delSong.getSongImg().equals("/songImg/init.JPG")){
                 File delImg = new File(songImgPath + delSong.getSongImg().replaceAll("/songImg", ""));
                 delImg.delete();
             }
@@ -145,7 +145,7 @@ public class SongController {
                 jsonObject.put("data", new Status(200, "更新歌曲图片成功", null));
             }
             //最后删除旧文件
-            if (!oldSongImgPath.equals("init.jpg")){
+            if (!oldSongImgPath.equals("init.JPG")){
                 File oldFile = new File(oldSongImgPath);
                 oldFile.delete();
             }
@@ -195,6 +195,13 @@ public class SongController {
         List<Song> list=iSongService.selectSongNoInCurrentList(songListId);
         System.out.println("list = " + list);
         jsonObject.put("data",new Status(200,"successful",list));
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/selectById",method = RequestMethod.GET)
+    public Object selectSongById(Integer songId){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("data",new Status(200,"successful",iSongService.selectSongById(songId)));
         return jsonObject;
     }
 

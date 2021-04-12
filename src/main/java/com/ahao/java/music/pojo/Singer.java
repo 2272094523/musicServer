@@ -19,5 +19,4 @@ public class Singer implements Serializable {
     private Date singerBirth;
     private String singerLocation;
     private String singerIntroduction;
-
 }

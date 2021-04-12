@@ -44,6 +44,11 @@ public class SingerServiceImpl implements ISingerService {
     }
 
     @Override
+    public Integer selectTotals() {
+        return singerMapper.selectTotals();
+    }
+
+    @Override
     public List<Singer> selectAllSinger() {
         return singerMapper.selectAllSinger();
     }

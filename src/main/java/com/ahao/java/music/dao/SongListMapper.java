@@ -25,4 +25,5 @@ public interface SongListMapper {
     public SongList selectSongListByStyle(String songListStyle);
 
 
+    Integer selectTotals();
 }

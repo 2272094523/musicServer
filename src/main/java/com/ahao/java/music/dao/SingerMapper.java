@@ -28,8 +28,5 @@ public interface SingerMapper {
     public Singer selectSingerById(Integer singerId);
 
 
-
-
-
-
+    Integer selectTotals();
 }

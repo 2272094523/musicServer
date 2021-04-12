@@ -26,4 +26,6 @@ public interface SongMapper {
 
 
     List<Song> selectSongNoInCurrentList(Integer songListId);
+
+    Integer selectTotals();
 }

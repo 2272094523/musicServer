@@ -6,7 +6,7 @@
 
 
 
-    <resultMap id="BaseResultMap" type="singer">
+    <resultMap id="BaseResultMap" type="com.ahao.java.music.pojo.Singer">
         <id column="singer_id" property="singerId"></id>
         <result column="singer_name" property="singerName"></result>
         <result column="singer_sex" property="singerSex" javaType="java.lang.Byte" jdbcType="TINYINT" ></result>
@@ -15,7 +15,7 @@
         <result column="singer_location" property="singerLocation"></result>
         <result column="singer_introduction" property="singerIntroduction"></result>
     </resultMap>
-    <insert id="insertSinger" parameterType="singer" >
+    <insert id="insertSinger" parameterType="com.ahao.java.music.pojo.Singer" >
         insert into singer
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="singerId!=null">
@@ -113,6 +113,9 @@
 
     <select id="selectSingerById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select * from singer where singer_id=#{singerId} limit 1
+    </select>
+    <select id="selectTotals" resultType="java.lang.Integer">
+        select count(singer_id) from singer
     </select>
 
 </mapper>

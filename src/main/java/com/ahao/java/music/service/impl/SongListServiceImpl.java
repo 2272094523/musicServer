@@ -14,6 +14,12 @@ import java.util.List;
 public class SongListServiceImpl implements ISongListService {
     @Autowired
     private SongListMapper songListMapper;
+
+    @Override
+    public Integer selectTotals() {
+        return songListMapper.selectTotals();
+    }
+
     @Override
     public boolean insertSongList(SongList songList) {
         return songListMapper.insertSongList(songList)>0?true:false;
