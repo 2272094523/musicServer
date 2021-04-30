@@ -15,7 +15,7 @@ public class AdminServiceImpl implements IAdminService {
     @Autowired
     private AdminMapper adminMapper;
     @Override
-    public int verifyPassword(Admin admin) {
+    public Integer verifyPassword(Admin admin) {
         return adminMapper.verifyPassword(admin);
     }
 }

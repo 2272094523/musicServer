@@ -124,4 +124,12 @@ public class SingerController extends BaseControllerStringToDate {
             return jsonObject;
         }
     }
+
+    @RequestMapping("/getSingerById")
+    public Object selectSingerById(Integer singerId){
+        JSONObject jsonObject = new JSONObject();
+        Singer singer = iSingerService.selectSingerById(singerId);
+        jsonObject.put("data",new Status(200,"查询成功",singer));
+        return jsonObject;
+    }
 }

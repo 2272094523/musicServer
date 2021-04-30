@@ -21,9 +21,22 @@ public class SongListServiceImpl implements ISongListService {
     }
 
     @Override
-    public boolean insertSongList(SongList songList) {
-        return songListMapper.insertSongList(songList)>0?true:false;
+    public Integer styleIsExist(String style) {
+        return songListMapper.styleIsExist(style);
+    }
 
+    @Override
+    public List<String> getSongStyle() {
+        return songListMapper.getSongStyle();
+    }
+
+    @Override
+    public boolean insertSongList(SongList songList) {
+        Integer result = songListMapper.styleIsExist(songList.getSongListStyle());
+        if (result == null) {
+            songListMapper.insertStyle(songList.getSongListStyle());
+        }
+        return songListMapper.insertSongList(songList)>0?true:false;
     }
 
     @Override
@@ -52,7 +65,7 @@ public class SongListServiceImpl implements ISongListService {
     }
 
     @Override
-    public SongList selectSongListByStyle(String songListStyle) {
+    public List<SongList> selectSongListByStyle(String songListStyle) {
         return songListMapper.selectSongListByStyle(songListStyle);
     }
 

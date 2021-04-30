@@ -6,12 +6,10 @@ import com.ahao.java.music.pojo.Status;
 import com.ahao.java.music.service.IAdminService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private final IAdminService iAdminService;
@@ -21,12 +19,11 @@ public class AdminController {
     }
 
 
-    @PostMapping("/admin/login")
+    @PostMapping("/login")
     public Object LoginStatus(Admin admin){
         JSONObject jsonObject=new JSONObject();
-        int id;
-        System.out.println(admin);
-        if ((id=iAdminService.verifyPassword(admin))>=0){
+        Integer id;
+        if ((id=iAdminService.verifyPassword(admin))!=null){
             jsonObject.put("data",new Status(200,"登录成功",id));
             return jsonObject;
         }

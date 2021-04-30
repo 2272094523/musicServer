@@ -131,7 +131,10 @@
     </select>
 
     <select id="selectSongById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select song_url,song_img from song where song_id=#{songId}
+        select a.song_id,a.song_name,a.song_introduction,a.song_img,a.song_url,a.song_lyric,a.song_createtime,a.song_updatetime,b.singer_name as singer_name,b.singer_id
+        from song a left join singer b
+        on a.song_singerid=b.singer_id
+        where song_id=#{songId}
     </select>
 
     <select id="selectAllSongBySingerId" parameterType="java.lang.Integer" resultMap="LeftJoinMap">

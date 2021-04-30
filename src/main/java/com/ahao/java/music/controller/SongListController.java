@@ -7,10 +7,7 @@ import com.ahao.java.music.pojo.Status;
 import com.ahao.java.music.service.ISongListService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -102,6 +99,28 @@ public class SongListController {
             return jsonObject;
         }
 
+    }
+
+    @RequestMapping(value = "/fuzzySelectByTitle")
+    public Object fuzzySelectByTitle(String songListTitle){
+        JSONObject jsonObject = new JSONObject();
+        List<SongList> songLists = iSongListService.fuzzySelectSongListByTitle(songListTitle);
+        jsonObject.put("data",new Status(200,"查询歌单成功",songLists));
+        return jsonObject;
+    }
+    @GetMapping("getSongStyle")
+    public Object getSongStyle(){
+        JSONObject jsonObject = new JSONObject();
+        List<String> songStyleList=iSongListService.getSongStyle();
+        jsonObject.put("data",new Status(200,"查询成功",songStyleList));
+        return jsonObject;
+    }
+    @GetMapping("selectByStyle")
+    public Object selectSongListByStyle(String songListStyle){
+        JSONObject jsonObject=new JSONObject();
+        List<SongList> list=iSongListService.selectSongListByStyle(songListStyle);
+        jsonObject.put("data",new Status(200,"查询成功",list));
+        return jsonObject;
     }
 
 

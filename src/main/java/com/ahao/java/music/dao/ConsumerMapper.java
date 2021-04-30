@@ -11,4 +11,12 @@ public interface ConsumerMapper {
     List<Consumer> selectAllConsumer();
 
     Integer selectTotals();
+
+    Integer selectConsumerIsExist(String consumerUserName);
+
+    Integer insertConsumer(Consumer consumer);
+
+    Integer getEmailIsExist(String consumerEmail);
+
+    Consumer verifyPassword(Consumer consumer);
 }

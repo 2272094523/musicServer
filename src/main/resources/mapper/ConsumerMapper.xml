@@ -11,23 +11,91 @@
         <result column="consumer_username" property="consumerUserName" ></result>
         <result column="consumer_nickname" property="consumerNickName" ></result>
         <result column="consumer_sex" property="consumerSex" javaType="java.lang.Byte" jdbcType="TINYINT"></result>
-        <result column="consumer_phone" property="consumerPhone" ></result>
         <result column="consumer_email" property="consumerEmail" ></result>
         <result column="consumer_birth" property="consumerBirth" jdbcType="TIMESTAMP" javaType="java.util.Date"></result>
         <result column="consumer_introduction" property="consumerIntroduction" ></result>
         <result column="consumer_location" property="consumerLocation" ></result>
         <result column="consumer_img" property="consumerImg" ></result>
-        <result column="consumer_createtime" property="consumerCreateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"></result>
-        <result column="consumer_updatetime" property="consumerUpdateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"></result>
-
+        <result column="consumer_createtime" property="consumerCreateTime"></result>
     </resultMap>
+    <insert id="insertConsumer" parameterType="com.ahao.java.music.pojo.Consumer">
+        insert into consumer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="consumerUserName!=null">
+                consumer_username,
+            </if>
+            <if test="consumerPassword!=null">
+                consumer_password,
+            </if>
+            <if test="consumerSex!=null">
+                consumer_sex,
+            </if>
+            <if test="consumerBirth!=null">
+                consumer_birth,
+            </if>
+            <if test="consumerLocation!=null">
+                consumer_location,
+            </if>
+            <if test="consumerIntroduction!=null">
+                consumer_introduction,
+            </if>
+            <if test="consumerImg!=null">
+                consumer_img,
+            </if>
+            <if test="consumerNickName!=null">
+                consumer_nickname,
+            </if>
+            <if test="consumerEmail!=null">
+                consumer_email,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="consumerUserName!=null">
+                #{consumerUserName},
+            </if>
+            <if test="consumerPassword!=null">
+                #{consumerPassword},
+            </if>
+            <if test="consumerSex!=null">
+                #{consumerSex},
+            </if>
+            <if test="consumerBirth!=null">
+                #{consumerBirth},
+            </if>
+            <if test="consumerLocation!=null">
+                #{consumerLocation},
+            </if>
+            <if test="consumerIntroduction!=null">
+                #{consumerIntroduction},
+            </if>
+            <if test="consumerImg!=null">
+                #{consumerImg},
+            </if>
+            <if test="consumerNickName!=null">
+                #{consumerNickName},
+            </if>
+            <if test="consumerEmail!=null">
+                #{consumerEmail},
+            </if>
+        </trim>
+    </insert>
     <select id="selectAllConsumer" resultMap="BaseResultMap">
         select
-        consumer_id,consumer_username,consumer_nickname,consumer_sex,consumer_phone,consumer_email,consumer_birth,consumer_introduction,
-        consumer_img,consumer_createtime,consumer_updatetime
+        consumer_id,consumer_username,consumer_nickname,consumer_sex,consumer_email,consumer_birth,consumer_introduction,
+        consumer_img,consumer_createtime
         from consumer
     </select>
     <select id="selectTotals" resultType="java.lang.Integer">
         select count(consumer_id) from consumer
+    </select>
+    <select id="selectConsumerIsExist" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select consumer_id from consumer where consumer_username=#{consumerUserName} limit 1
+    </select>
+    <select id="getEmailIsExist" resultType="java.lang.Integer">
+        select consumer_id from consumer where consumer_email=#{consumerEmail} limit 1
+    </select>
+    <select id="verifyPassword" resultMap="BaseResultMap" >
+         select * from consumer where consumer_username=#{consumerUserName} and consumer_password =#{consumerPassword} limit 1;
     </select>
 </mapper>

@@ -18,6 +18,16 @@ public class ConsumerServiceImpl implements IConsumerService {
     @Autowired
     private ConsumerMapper consumerMapper;
 
+
+    @Override
+    public Consumer verifyPassword(Consumer consumer) {
+        return consumerMapper.verifyPassword(consumer);
+    }
+    @Override
+    public boolean getEmailIsExist(String consumerEmail) {
+        return consumerMapper.getEmailIsExist(consumerEmail)==null?false:true;
+    }
+
     @Override
     public List<Consumer> selectAllConsumer() {
         return consumerMapper.selectAllConsumer();
@@ -26,5 +36,15 @@ public class ConsumerServiceImpl implements IConsumerService {
     @Override
     public Integer selectTotals() {
         return  consumerMapper.selectTotals();
+    }
+
+    @Override
+    public boolean selectConsumerIsExist(String consumerUserName) {
+        return consumerMapper.selectConsumerIsExist(consumerUserName)==null?false:true;
+    }
+
+    @Override
+    public Integer insertConsumer(Consumer consumer) {
+        return consumerMapper.insertConsumer(consumer);
     }
 }

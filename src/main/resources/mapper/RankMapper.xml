@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahao.java.music.dao.RankMapper">
+
+
+    <insert id="insertRank" parameterType="com.ahao.java.music.dao.RankMapper">
+        insert into rank(rank_songlist_id,rank_consumer_id,rank_score) values (#{rankSongListId},#{rankConsumerId},#{rankScore})
+    </insert>
+    <select id="selectRankAvgScore" resultType="java.lang.Double" parameterType="java.lang.Integer">
+        select avg(rank_score) from rank where rank_songlist_id=#{rankSongListId}
+    </select>
+    <select id="selectRankTotalScore" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select sum(rank_score) from rank where rank_songlist_id=#{rankSongListId}
+    </select>
+</mapper>

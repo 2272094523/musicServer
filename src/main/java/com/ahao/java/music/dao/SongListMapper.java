@@ -22,8 +22,13 @@ public interface SongListMapper {
 
     public SongList selectSongListById(Integer songListId);
 
-    public SongList selectSongListByStyle(String songListStyle);
-
+    public List<SongList> selectSongListByStyle(String songListStyle);
 
     Integer selectTotals();
+
+    Integer styleIsExist(String style);
+
+    Integer insertStyle(String style);
+
+    List<String> getSongStyle();
 }

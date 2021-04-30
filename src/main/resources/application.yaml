@@ -5,9 +5,9 @@ spring:
     multipart:
       max-file-size: 10MB
   datasource:
-    url: "jdbc:mysql://localhost:3306/music?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false"
+    url: "jdbc:mysql://101.132.236.121:3306/music?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false"
     username: root
-    password: 123456
+    password: Ljh554959!
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -27,10 +27,31 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    username: 2272094523@qq.com
+    password: ouaawcixsdxudjee
+    properties:
+      mail:
+        smtp:
+          enable: true
+  redis:
+    host: 101.132.236.121
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.ahao,java.music.pojo
 logging:
   level:
     com.ahao.java.music.dao: debug
+
 
