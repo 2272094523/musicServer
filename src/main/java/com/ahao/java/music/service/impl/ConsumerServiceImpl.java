@@ -47,4 +47,9 @@ public class ConsumerServiceImpl implements IConsumerService {
     public Integer insertConsumer(Consumer consumer) {
         return consumerMapper.insertConsumer(consumer);
     }
+
+    @Override
+    public Integer changeInformation(Consumer consumer) {
+        return consumerMapper.changeInformation(consumer);
+    }
 }

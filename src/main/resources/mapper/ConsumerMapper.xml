@@ -80,6 +80,9 @@
             </if>
         </trim>
     </insert>
+    <update id="changeInformation">
+        update consumer
+    </update>
     <select id="selectAllConsumer" resultMap="BaseResultMap">
         select
         consumer_id,consumer_username,consumer_nickname,consumer_sex,consumer_email,consumer_birth,consumer_introduction,

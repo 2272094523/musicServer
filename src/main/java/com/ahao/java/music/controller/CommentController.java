@@ -18,12 +18,8 @@ import java.util.Date;
 @RestController
 @RequestMapping("/comment")
 public class CommentController extends BaseControllerStringToDate {
-
-
     @Autowired
     private ICommentService iCommentService;
-
-
     @PostMapping("/insert")
     public Object insertComment(Comment comment){
         JSONObject jsonObject = new JSONObject();

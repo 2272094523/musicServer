@@ -16,4 +16,6 @@ public interface IConsumerService {
     boolean getEmailIsExist(String consumerEmail);
 
     Consumer verifyPassword(Consumer consumer);
+
+    Integer changeInformation(Consumer consumer);
 }

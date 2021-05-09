@@ -19,4 +19,6 @@ public interface ConsumerMapper {
     Integer getEmailIsExist(String consumerEmail);
 
     Consumer verifyPassword(Consumer consumer);
+
+    Integer changeInformation(Consumer consumer);
 }

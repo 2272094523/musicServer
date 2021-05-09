@@ -83,4 +83,21 @@ public class ConsumerController extends BaseControllerStringToDate {
         jsonObject.put("data",new Status(204,"登录失败，用户名或密码错误",null));
         return jsonObject;
     }
+
+    @RequestMapping(value = "changeInformation", method = RequestMethod.POST)
+    public Object ChangeInformation(Consumer consumer,@RequestParam("code")String code){
+        JSONObject jsonObject = new JSONObject();
+        boolean emailResult=mailService.verifyCode(consumer.getConsumerEmail(),code);
+        if (!emailResult){
+            jsonObject.put("data", new Status(204, "错误，验证码错误或验证码已过期", null));
+            return  jsonObject;
+        }
+        Integer changeResult=iConsumerService.changeInformation(consumer);
+        if (changeResult!=null){
+            jsonObject.put("data",new Status(200,"修改成功",consumer));
+            return jsonObject;
+        }
+        jsonObject.put("data",new Status(205,"服务器繁忙",null));
+        return jsonObject;
+    }
 }
